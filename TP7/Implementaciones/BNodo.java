@@ -1,4 +1,4 @@
-package TP6.Implementaciones;
+package TP7.Implementaciones;
 import TP5.Interfaz.Position;
 public class BNodo<E> implements Position<E> {
     //Atributos de intancia

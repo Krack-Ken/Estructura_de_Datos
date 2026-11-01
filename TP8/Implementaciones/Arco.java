@@ -1,6 +1,7 @@
-import TP4.Interfaz.PositionList;
-import TP4.ListaDoble.TDALista;
+package TP8.Implementaciones;
+
 import TP8.Interfaz.Edge;
+import TP8.Interfaz.Vertex;
 
 
 /**
@@ -9,20 +10,13 @@ import TP8.Interfaz.Edge;
  */
 public class Arco<V,E> implements Edge<E>{
     //Atributos de Instancia
-    PositionList<Vertex<V>> listaDeVertices;
+    Vertex<V> verticeOrigen;
+    Vertex<V> verticeDestino;
     int peso;
     E rotulo;
 
     //Constructor
-    public Arco(){
-        listaDeVertices = new TDALista<Vertex<V>>();
-    }
-    public Arco(E rotulo){
-        listaDeVertices = new TDALista<Vertex<V>>();
-        this.rotulo = rotulo;
-    }
     public Arco(E rotulo, int peso){
-        listaDeVertices = new TDALista<Vertex<V>>();
         this.rotulo = rotulo;
         this.peso = peso;
     }

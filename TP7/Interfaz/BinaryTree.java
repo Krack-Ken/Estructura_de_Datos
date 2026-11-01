@@ -1,4 +1,4 @@
-package TP6.Interfaz;
+package TP7.Interfaz;
 
 import TP5.Interfaz.*;
 /**

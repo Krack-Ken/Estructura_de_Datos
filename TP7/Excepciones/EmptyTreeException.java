@@ -1,4 +1,4 @@
-package TP6.Excepciones;
+package TP7.Excepciones;
 
 public class EmptyTreeException extends RuntimeException{
 	public EmptyTreeException(String msg) {

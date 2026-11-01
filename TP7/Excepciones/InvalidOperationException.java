@@ -1,4 +1,4 @@
-package TP6.Excepciones;
+package TP7.Excepciones;
 
 public class InvalidOperationException extends RuntimeException{
 	public InvalidOperationException(String msg) {

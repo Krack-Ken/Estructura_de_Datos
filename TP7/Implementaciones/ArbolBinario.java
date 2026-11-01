@@ -1,4 +1,4 @@
-package TP6.Implementaciones;
+package TP7.Implementaciones;
 
 import java.util.Iterator;
 import TP5.Excepciones.BoundaryViolationException;
@@ -8,7 +8,7 @@ import TP5.Interfaz.Position;
 import TP5.Interfaz.PositionList;
 import TP6.Excepciones.EmptyTreeException;
 import TP6.Excepciones.InvalidOperationException;
-import TP6.Interfaz.BinaryTree;
+import TP7.Interfaz.BinaryTree;
 
 public class ArbolBinario<E> implements BinaryTree<E>{
     //Atributos
