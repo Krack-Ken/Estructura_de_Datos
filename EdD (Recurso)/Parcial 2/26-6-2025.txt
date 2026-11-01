@@ -1,0 +1,65 @@
+Ejercicio 1.
+Suponga que cuenta con la clase Diccionario<K,V> que implementa la interfaz Dicctionary<K,V> vista en clases. Esta clase implementa un diccionario utilizando hash abrierto. Agregue un método a esta clase con la signatura siguiente: public int cantEntradas(K key, V value). Este método deberá contar la cantidad de entradas con clave key que hay en el diccionario. Comparar claves por equivalencia. Si utiliza otros métodos de la clase Diccionario<K,V> deberá implementarlos.
+
+public class Diccionario implements Dicctionary<K,V> {
+    protected PositionList<Entrada<K,V>>[] a;
+    protected int n; // cantidad de entradas
+    protected int N; // tamaño del arreglo
+    protected static final float fc = 0.5f;
+    ...
+}
+
+public class Diccionario implements Dicctionary<K,V> {
+    protected PositionList<Entrada<K,V>>[] a;
+    protected int n; // cantidad de entradas
+    protected int N; // tamaño del arreglo
+    protected static final float fc = 0.5f;
+
+    public int cantEntradas(K key, V value){
+        int contador = 0;
+        int b = Math.abs(key.hashCode()) % N;
+        for(Entrada<K,V> e : a[b]){
+            if(e.getKey().equals(key) && e.getValue().equals(value)){
+                contador++;
+            }
+        }
+        return contador;
+    }
+}
+
+Ejercicio 2.
+Suponga que cuenta con la clase Arbol<E> que implementa la interfaz Tree<E> vista en clase. Escriba un método tal que reciba una posición p y un rótulo r, y agregue todas las posiciones del subárbol determinado por p, un nuevo hijo al final con rótulo r. Cuenta con total acceso a la estructura. Si utiliza otros métodos del TDAArbol deberá implementarlos.
+public class Arbol<E> implements Tree<E>{
+    protected TNodo<E> raiz;
+    protected int cantElems;
+    ...
+}
+
+public class Arbol<E> implements Tree<E>{
+    protected TNodo<E> raiz;
+    protected int cantElems;
+
+    public void hijosR(Position<E> p, E r){
+        //Asumo que p es válida
+        TNodo<E> tn = (TNodo<E>)p;
+        for(TNodo<E> n = tn.getHijos()){
+            agregarHijos(n, r);
+        }
+        TNodo<E> nuevoHijo = new TNodo<E>(r);
+        tn.getHijos().addLast(nuevoHijo);
+        nuevoHijo.setPadre(tn);
+        cantElems++;
+    }
+
+    private void agregarHijos(TNodo<E> tn, E r){
+        if(!tn.getHijos().isEmpty()){
+            for(TNodo<E> n = tn.getHijos()){
+                agregarHijos(n, r);
+            }
+        }
+        TNodo<E> nuevoHijo = new TNodo<E>(r);
+        tn.getHijos().addLast(nuevoHijo);
+        nuevoHijo.setPadre(tn);
+        cantElems++;
+    }
+}

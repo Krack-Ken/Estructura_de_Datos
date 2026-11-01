@@ -1,0 +1,20 @@
+ejercicio1: 
+Agregue a la clase TDAPila un método tal que reciba por parámetro una pila genérica *p* y retorne una nueva pila producto de intercalar el contenido de la pila receptora del mensaje y la pila *p*. Tenga en cuenta que luego de ejecutarse este método ambas pilas quedarán vacías. Implemente todos los métodos auxiliares implementados. No debe implementar los métodos correspondientes a los mensajes que se le envíen a la pila *p*. Las pilas pueden tener distintos tamaños.
+Por ejemplo: p[1, 2, 3] y q[4, 5, 6] = [3, 6, 2, 5, 1, 4]. p[1, 2, 3] q[4, 5, 6, 1] = [3, 1, 2, 6, 1, 5, 4]
+
+public class TDAPila<E> implements Stack<E>{
+  private int cantElems();
+
+  public Stack<E> intercalar(Stack<E> p){
+    Stack<E> aux = new TDAPila<>();
+    while(!(this.isEmpty()) || !(p.isEmpty())){
+      if(!(this.isEmpty())){
+	aux.push(this.pop())
+      }
+      if(!(p.isEmpty())){
+	aux.push(p.pop())
+      }
+    }
+    return aux;
+  }
+}

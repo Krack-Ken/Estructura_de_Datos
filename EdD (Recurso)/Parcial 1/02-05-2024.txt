@@ -1,0 +1,74 @@
+Ejercicio 1:
+**a)** Suponga que cuenta con la clase PilaConArreglo que implementa la interface Stack vista en clase utilizando un arreglo. Agregue un método a la clase PilaConArreglo que reciba otra pila *p* y agregue los elementos de *p* en la pila receptora del mensaje en el tope de la misma, por ejemplo:
+     [C]   [G]    [D]
+     [B]   [F] -> [F]
+this [A]  p[D]    [G]   p[]
+		  [C]
+		  [B]
+		  [A]
+
+Si utiliza el método push para apilar en la pila que recibe el mensaje deberá implementarlo. Debe considerar el caso en el que la cantidad de elementos de la pila *p* sea mayor a la cantidad de componentes disponibles en el arreglo receptor del mensaje. Recuerde que para resolver este ejercicio tiene total acceso a la estructura de la pila que recibe el mensaje.
+
+public class PilaConArreglo<E> implements Stack<E>{
+    protected E[] p;
+    protected int tope;
+    ...
+
+implementación: 
+
+public class PilaConArreglo<E> implements Stack<E>{
+  protected E[] p;
+  protected int tope;
+  
+  public void agregarP(Stack<E> PilasConArreglo<E> pila){
+    if (pila.size() > (p.length - this.tope)){ //si la nueva pila tiene más elementos que el espacio de la lista actual
+      E[] aux = (E[]) new Object [p.length + pila.length()]; //La creo más grande para tener margen si se usa más de una vez el método
+      for (int i = 0; i < this.tope; i++){
+	aux[i] = p[i];
+      }
+      p = aux;
+    }
+    while (!(pila.isEmpty())){
+      p[tope++] = pila.pop();
+    }
+  }
+}
+
+Orden O(n + m) si hay que redimencionar, o O(m) si no
+
+
+Ejercicio 2:
+
+public int maximoEnCola(Queue<Integer> q){
+  int aux = 0;
+  Queue<Integer> cola = new TDACola<>();
+  while(!(q.isEmpty())){
+    if(q.top() > aux)
+      aux = q.top();
+    cola.enqueue(q.dequeue());
+  }
+  while(!(cola.isEmpty())){
+    q.enqueue(cola.dequeue());
+  }
+  return aux;
+}
+Tiempo de ejecución O(n)
+
+Ejercicio 3:
+public PositionList<Character> soloVocales (PositionList<Character> pl, int n){
+  
+  Iterator<Character> it = pl.iterator(); //iterador para recorrer la lista
+  int cont = 0;
+  PositionList<Character> aux = new ListaDE<>(); //lista a devolver
+
+  while(it.hasNext() && cont < n){ //Si pl está vacía se salta el while
+    Character ch = it.next();
+    //Asumo que no pueden haber mayúsculas
+    if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u'){
+      aux.addLast(ch);
+      cont++;
+    }
+  }
+  return aux;
+}
+El orden de ejecución de esta implementación es O(m) tal que m = |pl|, ya que en el peor de los casos el while tendrá que recorrer la lista entera (por ejemplo, si pl posee una cantidad menor de vocales a n, o m = n). En caso de que pueda haber mayúsculas, cambio ch por Character.toLowerCase(ch) en el if.
