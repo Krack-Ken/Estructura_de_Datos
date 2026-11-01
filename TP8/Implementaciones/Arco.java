@@ -25,4 +25,5 @@ public class Arco<V,E> implements Edge<E>{
     public E element(){
         return rotulo;
     }
+    
 }
