@@ -1,19 +1,16 @@
 package TP6.Implementaciones;
 
-import java.lang.Iterable;
-import java.util.Iterator;
-
+import TP5.Excepciones.BoundaryViolationException;
 import TP5.Excepciones.InvalidPositionException;
 import TP5.Implementaciones.TDALista;
-import TP5.Interfaz.Position;
-import TP5.Interfaz.PositionList;
-import TP5.Excepciones.BoundaryViolationException;
 import TP5.Implementaciones.TDAMapeo;
 import TP5.Interfaz.Map;
-
-import TP6.Interfaz.Tree;
-import TP6.Excepciones.InvalidOperationException;
+import TP5.Interfaz.Position;
+import TP5.Interfaz.PositionList;
 import TP6.Excepciones.EmptyTreeException;
+import TP6.Excepciones.InvalidOperationException;
+import TP6.Interfaz.Tree;
+import java.util.Iterator;
 
 @SuppressWarnings({"unchecked", "rawtype"})
 public class Arbol<E> implements Tree<E>{

@@ -10,20 +10,35 @@ import TP8.Interfaz.Vertex;
  */
 public class Arco<V,E> implements Edge<E>{
     //Atributos de Instancia
-    Vertex<V> verticeOrigen;
+    Vertex<V> verticeOrigen;//Este se no existe en grafos dirigidos asdsa
     Vertex<V> verticeDestino;
-    int peso;
-    E rotulo;
+    E peso;
 
     //Constructor
-    public Arco(E rotulo, int peso){
-        this.rotulo = rotulo;
+    public Arco(Vertex<V> verticeOrigen, Vertex<V> verticeDestino, E peso){
         this.peso = peso;
+        this.verticeOrigen = verticeOrigen;
+        this.verticeDestino = verticeDestino;
     }
 
     //Métodos
+
+    /** Devuelve el peso del arco
+     * @return El peso del arco
+     */
     public E element(){
-        return rotulo;
+        return peso;
     }
     
+    public void setElement(E peso){
+        this.peso = peso;
+    }
+
+    public Vertex<V> getVerticeOrigen(){
+        return verticeOrigen;
+    }
+
+    public Vertex<V> getVerticeDestino(){
+        return verticeDestino;
+    }
 }
