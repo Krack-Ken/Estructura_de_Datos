@@ -10,9 +10,9 @@ import TP8.Interfaz.Vertex;
  */
 public class Arco<V,E> implements Edge<E>{
     //Atributos de Instancia
-    Vertex<V> verticeOrigen;//Este se no existe en grafos dirigidos asdsa
-    Vertex<V> verticeDestino;
-    E peso;
+    protected Vertex<V> verticeOrigen;//Este se no existe en grafos dirigidos asdsa
+    protected Vertex<V> verticeDestino;
+    protected E peso;
 
     //Constructor
     public Arco(Vertex<V> verticeOrigen, Vertex<V> verticeDestino, E peso){
