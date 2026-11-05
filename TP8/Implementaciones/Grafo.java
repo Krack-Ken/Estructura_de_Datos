@@ -54,6 +54,68 @@ public class Grafo<V,E> implements Graph<V,E> {
             }
         return opuesto;
     }
+    @Override
+    public Vertex<V> [] endvertices(Edge<E> e){
+        Arco<V,E> arco = checkEdge(e);
+        Vertex<V>[] lista = new Vertex[2];
+        lista[0] = arco.getVerticeOrigen();
+        lista[1] = arco.getVerticeDestino();  
+        return lista;
+    }
+    @Override
+    public boolean areAdjacent(Vertex<V> v,Vertex<V> w){
+        Vertice<V,E> verticeV = checkVertex(v);
+        Vertice<V,E> verticeW = checkVertex(w);
+        boolean aux = false;
+        
+        // Tomo todos los arcos de v, y si w es uno de los extremos de alguno de dichos arcos, 
+        // v será adyacente con w
+        for(Edge<E> arcos : verticeV.arcosIncidentes()){
+            Arco<V,E> a = (Arco)arcos;
+            if(opposite(v, arcos) == (verticeW)){
+                aux = true;
+                break;
+            }
+        }
+        return aux;
+    }
+    
+    @Override
+    public V replace(Vertex<V> v, V x){
+        Vertice<V,E> vertice = checkVertex(v);
+        V aux = vertice.element();
+        vertice.setElement(x);
+        return aux;
+    }
+
+    @Override 
+    public E replace(Edge<E> e, E x){
+        Arco<V,E> arco = checkEdge(e);
+        E aux = arco.element();
+        arco.setElement(x);
+        return aux;
+    }
+
+    @Override 
+    public Vertex<V> insertVertex(V x){
+        Vertex<V> vertice = new Vertice<V,E>(x);
+        vertices.addLast(vertice);
+        return vertice;
+    }
+
+    @Override
+    public Edge<E> insertEdge(Vertex<V> v, Vertex<V> w, E e){
+        Vertice<V,E> verticeO = checkVertex(v);
+        Vertice<V,E> verticeD = checkVertex(w);
+        Edge<E> arco = new Arco<V,E>(verticeO, verticeD, e);
+        arcos.addLast(arco);
+        verticeO.arcosIncidentes().addLast(arco);
+        //If para que en el caso de que v == w, no tenga un arco duplicado
+        if(!(verticeO.equals(verticeD))){
+            verticeD.arcosIncidentes().addLast(arco);
+        }
+        return arco;
+    } 
 
     //Métodos auxiliares
     /**
