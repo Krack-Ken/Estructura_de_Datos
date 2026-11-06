@@ -11,7 +11,6 @@ import org.junit.Test;
 import java.util.Iterator;
 
 import TP8.Excepciones.*;
-import TP8.Implementaciones.*;
 import TP8.Interfaz.*;
 
 /**
@@ -40,7 +39,7 @@ public class GraphTests {
 	 */
 	@Before
 	public void setUp() {
-		//graph = new ListaDeAdyacencias<Object, Object>(); //TODO: Descomentar y crear instancia del TDA a testear
+		graph = new Grafo<Object, Object>(); 
 		o1 = new Object();
 		Assume.assumeNotNull(graph);
 	}

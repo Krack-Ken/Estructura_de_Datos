@@ -11,8 +11,9 @@
         "TP8/*"
     ],
     "java.project.referencedLibraries": [
-        "lib/*.jar",
+        "lib/**/*.jar"
     ],
+    
     
     "editor.inlineSuggest.enabled": false,
 }

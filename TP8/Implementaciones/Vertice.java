@@ -1,5 +1,6 @@
 package TP8.Implementaciones;
 
+import TP4.Interfaz.Position;
 import TP4.Interfaz.PositionList;
 import TP4.ListaDoble.TDALista;
 import TP8.Interfaz.Edge;
@@ -14,6 +15,7 @@ public class Vertice<V, E> implements Vertex<V>{
     //Atributos de instancia
     protected V element;
     protected PositionList<Edge<E>> arcosIncidentes;
+    protected Position<Vertex<V>> posLista;
     
     //Constructor
     public Vertice(V element){
@@ -34,5 +36,11 @@ public class Vertice<V, E> implements Vertex<V>{
     }
     public PositionList<Edge<E>> arcosIncidentes(){
         return arcosIncidentes;
+    }
+    public Position<Vertex<V>> getPosLista(){
+        return posLista;
+    }
+    public void setPosLista(Position<Vertex<V>> p){
+        posLista = p;
     }
 }

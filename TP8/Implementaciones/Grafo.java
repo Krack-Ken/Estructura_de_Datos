@@ -7,6 +7,7 @@ import TP8.Excepciones.InvalidVertexException;
 import TP8.Interfaz.Edge;
 import TP8.Interfaz.Graph;
 import TP8.Interfaz.Vertex;
+import javax.swing.text.Position;
 
 @SuppressWarnings ("all")
 public class Grafo<V,E> implements Graph<V,E> {
@@ -50,7 +51,7 @@ public class Grafo<V,E> implements Graph<V,E> {
             opuesto = arco.getVerticeOrigen();
         }
             else{
-                throw new InvalidVertexException("El arco no corresponde al vértice");
+                throw new InvalidEdgeException("El arco no corresponde al vértice");
             }
         return opuesto;
     }
@@ -71,7 +72,6 @@ public class Grafo<V,E> implements Graph<V,E> {
         // Tomo todos los arcos de v, y si w es uno de los extremos de alguno de dichos arcos, 
         // v será adyacente con w
         for(Edge<E> arcos : verticeV.arcosIncidentes()){
-            Arco<V,E> a = (Arco)arcos;
             if(opposite(v, arcos) == (verticeW)){
                 aux = true;
                 break;
@@ -98,8 +98,9 @@ public class Grafo<V,E> implements Graph<V,E> {
 
     @Override 
     public Vertex<V> insertVertex(V x){
-        Vertex<V> vertice = new Vertice<V,E>(x);
+        Vertice<V,E> vertice = new Vertice<V,E>(x);
         vertices.addLast(vertice);
+        vertice.setPosLista(vertices.last());
         return vertice;
     }
 
@@ -107,15 +108,47 @@ public class Grafo<V,E> implements Graph<V,E> {
     public Edge<E> insertEdge(Vertex<V> v, Vertex<V> w, E e){
         Vertice<V,E> verticeO = checkVertex(v);
         Vertice<V,E> verticeD = checkVertex(w);
-        Edge<E> arco = new Arco<V,E>(verticeO, verticeD, e);
+        Arco<V,E> arco = new Arco<>(verticeO, verticeD, e);
         arcos.addLast(arco);
+        arco.setPosLista(arcos.last());
         verticeO.arcosIncidentes().addLast(arco);
+        arco.setPositionO(verticeO.arcosIncidentes.last());
         //If para que en el caso de que v == w, no tenga un arco duplicado
         if(!(verticeO.equals(verticeD))){
             verticeD.arcosIncidentes().addLast(arco);
+            arco.setPositionD(verticeD.arcosIncidentes.last());
         }
         return arco;
     } 
+    @Override
+    public E removeEdge(Edge<E> e){
+        Arco<V,E> arco = checkEdge(e);
+        E elem = arco.element();
+        //Elimino el arco de la lista general
+        arcos.remove(arco.getPosition());
+        Vertice<V,E> verticeO = (Vertice)arco.getVerticeOrigen();
+        //elimino el arco de la lista de arcos del vértice origen
+        verticeO.arcosIncidentes().remove(arco.getPositionO());
+        //If por si el arco es un lazo, para no intentar "eliminarlo por 2da vez"
+        if(!arco.getVerticeDestino().equals(verticeO)){
+            Vertice<V,E> verticeD = (Vertice)arco.getVerticeDestino();
+            //elimino el arco de la lista de arcos del vértice destino
+            verticeD.arcosIncidentes().remove(arco.getPositionD());
+        }
+        return elem;
+    }
+
+    @Override
+    public V removeVertex(Vertex<V> v){
+        Vertice<V,E> vertice = checkVertex(v);
+        //Elimino todos los arcos conectados al vértice
+        for(Edge<E> e : vertice.arcosIncidentes()){
+            removeEdge(e); //Asumo que se puede modificar la lista mientras se usa el for
+        }
+        V elem = vertice.element;
+        vertices.remove(vertice.getPosLista());
+        return elem;
+    }
 
     //Métodos auxiliares
     /**
